@@ -8,11 +8,10 @@ public class PayrollCalculator {
         double base = e.baseSalary();
         double overtime = 0.0;
         for (Overtime ot : e.overtimes()) overtime += ot.hours() * ot.hourRate();
-
-        double gross = base + overtime;
+        
         double tax;
-        if (gross <= 3000) tax = gross * 0.08;
-        else if (gross <= 7000) tax = gross * 0.12;
+        if (gross () <= 3000) tax = gross * 0.08;
+        else if (gross () <= 7000) tax = gross * 0.12;
         else tax = gross * 0.18;
 
         double mealVoucher = e.hasMealVoucher() ? 450.0 : 0.0;
@@ -26,4 +25,8 @@ public class PayrollCalculator {
                            boolean hasMealVoucher, double healthPlanDeduction) {}
 
     public record Overtime(int hours, double hourRate) {}
+}
+
+double gross() {
+    return base + overtime;
 }
