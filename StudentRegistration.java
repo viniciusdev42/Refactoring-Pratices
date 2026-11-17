@@ -30,3 +30,12 @@ public class StudentRegistration {
         return name + " | " + email + " | " + phone + " | " + city + " - " + zip;
     }
 }
+
+class CityRegistration {
+    // Atributos da cidade
+}
+
+class ZipRegistration {
+    // Lógica de zip
+}
+
