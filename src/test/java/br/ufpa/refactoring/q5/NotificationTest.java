@@ -17,7 +17,13 @@ class NotificationTest {
 
     @Test
     void refactorGoal_collapseHierarchy_removeRedundantSubclass() {
-        // TODO: após refatorar, VIPPasswordResetNotification deve deixar de existir (ou ganhar comportamento real).
-        // O comportamento de renderização deve permanecer.
+        Notification n = new PasswordResetNotification("Joelma");
+        String r = n.render();
+
+        // Asserts de comportamento que garantem que a renderização continua correta
+        assertNotNull(r);
+        assertTrue(r.contains("Redefinição de senha"));
+        assertTrue(r.contains("Olá Joelma"));
+        assertTrue(r.contains("clique no link para redefinir"));
     }
 }

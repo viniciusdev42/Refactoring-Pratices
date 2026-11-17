@@ -21,7 +21,24 @@ class BillingServiceTest {
 
     @Test
     void refactorGoal_replaceConditionalWithPolymorphism() {
-        // TODO: após refatorar, o switch deve desaparecer (cada plano com sua política).
-        // Testes acima devem continuar passando.
+        // Valida o comportamento polimórfico cobrindo regras específicas de cada plano (como suporte prioritário e descontos)
+        BillingService svc = new BillingService();
+
+        Plan free = new FreePlan();
+        Plan student = new StudentPlan();
+        Plan pro = new ProPlan();
+        Plan enterprise = new EnterprisePlan();
+
+        // Free: sempre zero, mesmo com suporte ou usuários
+        assertEquals(0.0, svc.monthlyPrice(free, 100, true), 0.001);
+
+        // Student: preço base + suporte prioritário
+        assertEquals(19.90 + 59.90, svc.monthlyPrice(student, 50, true), 0.001);
+
+        // Pro: acima de 200 usuários aplica 5% de desconto
+        assertEquals((49.90 + 201 * 1.25) * 0.95, svc.monthlyPrice(pro, 201, false), 0.01);
+
+        // Enterprise: cálculo padrão com suporte prioritário
+        assertEquals(199.90 + 50 * 0.90 + 59.90, svc.monthlyPrice(enterprise, 50, true), 0.01);
     }
 }

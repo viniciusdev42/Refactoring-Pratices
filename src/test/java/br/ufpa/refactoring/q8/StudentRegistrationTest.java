@@ -23,6 +23,14 @@ class StudentRegistrationTest {
 
     @Test
     void refactorGoal_extractClass_contactAndAddress() {
-        // TODO: extrair ContactInfo/Address e mover validações/format mantendo testes.
+        // Testa o comportamento isolado da nova classe extraída (ContactInfo)
+        ContactInfo contact = new ContactInfo("contato@ufpa.br", "91977778888", "Belém", "66050-000");
+        
+        assertTrue(contact.isValid());
+        assertEquals("Ana | contato@ufpa.br | 91977778888 | Belém - 66050-000", contact.format("Ana"));
+        
+        // Testa validações específicas movidas para ContactInfo
+        ContactInfo invalidContact = new ContactInfo("email-invalido", "123", "Belém", "66000000");
+        assertFalse(invalidContact.isValid());
     }
 }

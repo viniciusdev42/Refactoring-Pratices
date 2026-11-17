@@ -19,6 +19,22 @@ class OrderTest {
 
     @Test
     void refactorGoal_moveDiscountLogic_toCustomerOrPolicy() {
-        // TODO: mover lógica de desconto para Customer ou um DiscountPolicy e fazer Order delegar.
+      // Testa se a lógica de desconto de fidelidade foi corretamente movida/delegada para o Customer:
+        
+        // 1. VIP com 6 anos (VIP: 25.0 + Fidelidade >= 5 anos: 15.0 = 40.0)
+        var vipLoyalCustomer = new Order.Customer(true, 6);
+        assertEquals(40.0, vipLoyalCustomer.calculateLoyaltyDiscount(), 0.001);
+
+        // 2. VIP com menos de 5 anos (Apenas VIP: 25.0)
+        var vipNewCustomer = new Order.Customer(true, 3);
+        assertEquals(25.0, vipNewCustomer.calculateLoyaltyDiscount(), 0.001);
+
+        // 3. Não-VIP com 5 ou mais anos (Apenas Fidelidade: 15.0)
+        var regularLoyalCustomer = new Order.Customer(false, 5);
+        assertEquals(15.0, regularLoyalCustomer.calculateLoyaltyDiscount(), 0.001);
+
+        // 4. Não-VIP com menos de 5 anos (Sem bônus: 0.0)
+        var regularNewCustomer = new Order.Customer(false, 2);
+        assertEquals(0.0, regularNewCustomer.calculateLoyaltyDiscount(), 0.001);
     }
 }

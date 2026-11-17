@@ -23,6 +23,8 @@ class RecentFilesTest {
 
     @Test
     void refactorGoal_replaceInheritanceWithDelegation() {
-        // TODO: após refatorar, RecentFiles NÃO deve estender ArrayList (verificar em code review).
+       // Garante que RecentFiles NÃO estende ArrayList (Herança substituída por Delegação)
+        assertNotEquals(ArrayList.class, RecentFiles.class.getSuperclass(), 
+            "RecentFiles não deve estender ArrayList diretamente; deve usar delegação.");
     }
 }
