@@ -3,7 +3,8 @@ package br.ufpa.refactoring.q2;
 public class PasswordPolicy {
 
     public boolean isValid(String password) {
-        return hasMinLength(password) && hasUpper(password) && hasDigit(password) && hasNoSpaces(password);
+        return (password.hasMinLength && password.hasUpper && password.hasDigit && password.hasNoSpaces)? true:false;
+    }
     }
 
     boolean hasMinLength(String p) { return p != null && p.length() >= 10; }
