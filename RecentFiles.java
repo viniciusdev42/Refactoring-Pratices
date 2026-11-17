@@ -1,18 +1,35 @@
 package br.ufpa.refactoring.q4;
 
-import java.util.ArrayList;
+public class ArrayList<String> {
+    
+    public void size() {
+        return ArrayList.size();
+    }
 
-public class RecentFiles extends ArrayList<String> {
+    public void remove() {
+        // Logica de remoção
+    } 
+
+
+    public void add() {
+        // Logica de adição
+    }
+}
+
+public class RecentFiles{
+
+    private ArrayList<String> _array = new ArrayList<String>();
 
     private final int limit;
 
-    public RecentFiles(int limit) {
+    public RecentFiles(int limit,_array) {
         this.limit = limit;
+        this._array = _array;
     }
 
     public void addFile(String path) {
-        remove(path);
-        add(0, path);
-        while (size() > limit) remove(size() - 1);
+        this._array.remove(path);
+        this._array.add(0, path);
+        while (this._array.size() > limit) this._array.remove(this._array.size() - 1);
     }
 }
