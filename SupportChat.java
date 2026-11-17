@@ -13,3 +13,13 @@ public class SupportChat {
         public boolean isBanned() { return banned; }
     }
 }
+
+class NullUser extends User {
+    boolean isNull(){
+        return true
+    };
+        
+}
+
+SupportChat support = (user.name != null) ?
+  user.name:new NullUser();
